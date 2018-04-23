@@ -87,9 +87,66 @@
       Contact me:
       <a class="email" href="mailto:{{.Email}}">{{.Email}}</a>
     </div>
+
+    <div>
+        {{if .TrueCond}}
+        true condition
+        {{end}}
+    </div>
+
+     <div>
+            {{if .FalseCon}}
+            not false condition
+            {{else}}
+            false condition
+            {{end}}
+        </div>
+
+        <div>
+        {{.user.Name}}
+        {{.user.Age}}
+        {{.user.Sex}}
+        </div>
+
+        <div>
+        {{with .user}}
+        {{.Name}}
+        {{.Age}}
+        {{.Sex}}
+        {{end}}
+        </div>
+
+     <div>
+     {{.nums}}
+     </div>
+
+     <div>
+     {{range .nums}}
+      {{.}}
+     {{end}}
+     </div>
+
+     <div>
+       {{$tplVar :=.tplVar}}
+       {{$tplVar}}
+     </div>
+
+     {{str2html .html}}
+
+<div>
+{{.pipe | htmlquote}}
+</div>
+{{template "test"}}
+
   </footer>
   <div class="backdrop"></div>
 
   <script src="/static/js/reload.min.js"></script>
 </body>
 </html>
+
+{{define "test"}}
+<div>
+this is test template
+</div>
+{{end}}
