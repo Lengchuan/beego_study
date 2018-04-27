@@ -1,10 +1,10 @@
 package main
 
 import (
-	_ "github.com/beego_study/routers"
+	_ "github.com/Lengchuan/beego_study/routers"
 	"github.com/astaxie/beego"
-	"github.com/beego_study/models"
 	"github.com/astaxie/beego/orm"
+	"github.com/Lengchuan/beego_study/models"
 )
 
 func init() {
