@@ -10,6 +10,13 @@ type Logincontroller struct {
 }
 
 func (this *Logincontroller) Get() {
+	isExist := this.Input().Get("exit") == "true"
+	if isExist {
+		this.Ctx.SetCookie("name", "", -1, "/")
+		this.Ctx.SetCookie("passwd", "", -1, "/")
+		this.Redirect("/login", 301)
+	}
+
 	this.TplName = "login.html"
 
 }
