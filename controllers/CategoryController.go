@@ -24,10 +24,19 @@ func (this *CategoryController) Get() {
 		if err != nil {
 			beego.Error(err)
 		}
-		this.Redirect("/category", 302)
+		this.Redirect("/category", 301)
 		return
 
 	case "del":
+		id := this.Input().Get("id")
+		if len(id) == 0 {
+			break
+		}
+		err := models.DelCategory(id)
+		if err != nil {
+			beego.Error(err)
+		}
+		this.Redirect("/category", 301)
 
 	default:
 		this.TplName = "category.html"

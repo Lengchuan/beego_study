@@ -7,6 +7,7 @@ import (
 	"path"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/mattn/go-sqlite3"
+	"strconv"
 )
 
 const (
@@ -79,4 +80,19 @@ func GetAllCateGory() ([]*Category, error) {
 	_, err := qs.All(&cates)
 
 	return cates, err
+}
+
+func DelCategory(id string) error {
+	cid, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+
+		return err
+	}
+	o := orm.NewOrm()
+
+	cate := &Category{Id: cid}
+	_, err = o.Delete(cate)
+
+	return err
+
 }
