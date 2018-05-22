@@ -106,11 +106,18 @@ func AddTopic(title, content string) error {
 	return err
 }
 
-func GetAllTopics() ([]*Topic, error) {
+func GetAllTopics(isDesc bool) ([]*Topic, error) {
 	o := orm.NewOrm()
 	topics := make([]*Topic, 0)
 	qs := o.QueryTable("topic")
-	_, err := qs.All(&topics)
+
+	var err error
+	if !isDesc {
+		qs.OrderBy("-createTime")
+		_, err = qs.All(&topics)
+	} else {
+		_, err = qs.All(&topics)
+	}
 
 	return topics, err
 }

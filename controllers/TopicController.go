@@ -16,7 +16,7 @@ func (this *TopicController) Get() {
 	this.Data["IsTopic"] = true
 	this.Data["IsLogin"] = checkAccount(this.Ctx)
 	var err error
-	this.Data["Topics"], err = models.GetAllTopics()
+	this.Data["Topics"], err = models.GetAllTopics(false)
 	if err != nil {
 		beego.Error(err)
 	}
