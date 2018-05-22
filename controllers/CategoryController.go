@@ -43,6 +43,7 @@ func (this *CategoryController) Get() {
 		this.Data["IsCategory"] = true
 		var err error
 		this.Data["Categories"], err = models.GetAllCateGory()
+		this.Data["IsLogin"] = checkAccount(this.Ctx)
 		if err != nil {
 			beego.Error(err)
 		}

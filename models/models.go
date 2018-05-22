@@ -34,7 +34,7 @@ type Topic struct {
 	CreateTime      time.Time `orm:"index"`
 	UpdateTime      time.Time `orm:"index"`
 	Views           int64     `orm:"index"`
-	ReplytTime      time.Time `orm:"index"`
+	ReplytTime      time.Time `orm:"index;auto_now"`
 	ReplyCount      int64
 	ReplyLastUserId string    `orm:"index"`
 }
@@ -95,4 +95,22 @@ func DelCategory(id string) error {
 
 	return err
 
+}
+
+func AddTopic(title, content string) error {
+	o := orm.NewOrm()
+	topic := Topic{Title: title, Content: content, CreateTime: time.Now(), UpdateTime: time.Now()}
+
+	_, err := o.Insert(&topic)
+
+	return err
+}
+
+func GetAllTopics() ([]*Topic, error) {
+	o := orm.NewOrm()
+	topics := make([]*Topic, 0)
+	qs := o.QueryTable("topic")
+	_, err := qs.All(&topics)
+
+	return topics, err
 }
