@@ -14,11 +14,13 @@
         </div>
 
         <div class="container">
+        {{range .Topics}}
             <div class="page-header">
-                <h1>我的第一篇博客</h1>
-                <h6 class="text-muted"> 文章发表于 xx年xx月xx日 xxxx</h6>
-                <p>我的第一篇博客</p>
+                <h1>{{.Title}}</h1>
+                <h6 class="text-muted"> 文章发表于 {{.CreateTime}},{{.ReplyCount}}</h6>
+                <p>{{.Content}}</p>
             </div>
+        {{end}}
         </div>
     </div>
 </div>
