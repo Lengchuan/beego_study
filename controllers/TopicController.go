@@ -47,3 +47,17 @@ func (this *TopicController) Post() {
 	this.Redirect("/topic", 302)
 
 }
+
+func (this *TopicController) View() {
+	this.TplName = "topic_view.html"
+
+	topic, err := models.GetTopic(this.Ctx.Input.Param("0"))
+	if err != nil {
+		beego.Error(err)
+		this.Redirect("/", 302)
+		return
+	}
+
+	this.Data["Topic"] = topic
+	this.Data["Tid"] = topic.Id
+}

@@ -121,3 +121,28 @@ func GetAllTopics(isDesc bool) ([]*Topic, error) {
 
 	return topics, err
 }
+
+func GetTopic(id string) (*Topic, error) {
+
+	tid, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	topic := new(Topic)
+	o := orm.NewOrm()
+	qs := o.QueryTable("topic")
+	err = qs.Filter("id", tid, ).One(topic)
+
+	if err != nil {
+
+		return nil, err
+	}
+
+	//增加浏览次数
+	topic.Views++
+	_, err = o.Update(topic)
+
+	return topic, err
+
+}

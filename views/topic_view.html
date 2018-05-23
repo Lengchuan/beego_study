@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{.Topic.Title}} - 我的beego博客</title>
+{{template "header"}}
+</head>
+
+<body>
+<div>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+        {{template "navbar" .}}
+        </div>
+
+        <div class="container">
+            <h1>{{.Topic.Title}} <a href="/topic/modify?tid={{.Topic.Id}}" class="btn btn-default btn-sm">修改</a></h1>
+        {{.Topic.Content}}
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
