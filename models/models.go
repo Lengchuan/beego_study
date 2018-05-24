@@ -146,3 +146,24 @@ func GetTopic(id string) (*Topic, error) {
 	return topic, err
 
 }
+
+func ModifyTopic(id, title, content string) error {
+	tid, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return err
+	}
+	o := orm.NewOrm()
+
+	topic := Topic{Id: tid}
+	if o.Read(&topic) == nil {
+		topic.Title = title
+		topic.Content = content
+		topic.UpdateTime = time.Now()
+		_, err := o.Update(&topic)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
